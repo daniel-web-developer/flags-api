@@ -1,0 +1,45 @@
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #000000;
+}
+
+.flex {
+  display: flex;
+}
+.flex-justcont-c {
+  justify-content: center;
+}
+.flex-justcont-sb {
+  justify-content: space-between;
+}
+.flex-alignit-c {
+  align-items: center;
+}
+.flex-dir-col {
+  flex-direction: column;
+}
+.flex-dir-col-rev {
+  flex-direction: column-reverse;
+}
+
+:root {
+  --White: hsl(0, 0%, 100%);
+  --db-d: hsl(209, 23%, 22%);
+  --bg-d: hsl(207, 26%, 17%);
+  --vdb-l: hsl(200, 15%, 8%);
+  --dg-l: hsl(0, 0%, 52%);
+  --bg-l: hsl(0, 0%, 98%);
+}/*# sourceMappingURL=style.css.map */

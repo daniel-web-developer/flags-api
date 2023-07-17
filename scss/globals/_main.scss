@@ -1,0 +1,44 @@
+@use 'typography' as *;
+
+html{
+    box-sizing: border-box;
+    font-size: 100%;
+
+    scroll-behavior: smooth;
+}
+
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #000000;
+}
+
+.flex{
+    display: flex;
+
+    &-justcont-c{
+        justify-content: center;
+    }
+
+    &-justcont-sb{
+        justify-content: space-between;
+    }
+
+    &-alignit-c{
+        align-items: center;
+    }
+
+    &-dir-col{
+        flex-direction: column;
+    }
+
+    &-dir-col-rev{
+        flex-direction: column-reverse;
+    }
+}
