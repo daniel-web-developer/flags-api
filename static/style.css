@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
 html {
   box-sizing: border-box;
   font-size: 100%;
@@ -13,7 +14,7 @@ body {
   padding: 0;
   height: 100vh;
   width: 100vw;
-  background-color: #000000;
+  background-color: var(--bg);
 }
 
 .flex {
@@ -36,10 +37,23 @@ body {
 }
 
 :root {
-  --White: hsl(0, 0%, 100%);
-  --db-d: hsl(209, 23%, 22%);
-  --bg-d: hsl(207, 26%, 17%);
-  --vdb-l: hsl(200, 15%, 8%);
-  --dg-l: hsl(0, 0%, 52%);
-  --bg-l: hsl(0, 0%, 98%);
+  --text: hsl(200, 15%, 8%);
+  --elements: hsl(0, 0%, 100%);
+  --input: hsl(0, 0%, 52%);
+  --bg: hsl(0, 0%, 98%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: hsl(207, 26%, 17%);
+    --text: hsl(0, 0%, 100%);
+    --elements: hsl(209, 23%, 22%);
+  }
+}
+
+.home {
+  font-size: 14px;
+}
+
+.detail {
+  font-size: 16px;
 }/*# sourceMappingURL=style.css.map */
