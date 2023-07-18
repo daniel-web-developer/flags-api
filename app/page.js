@@ -5,7 +5,9 @@ export default function Home() {
   return (
     <Layout>
       <div className='home'>
-        
+        <div className='flex flex-justcont-sb home-options'>
+
+        </div>
       </div>
     </Layout>
   )

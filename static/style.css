@@ -44,6 +44,17 @@ body {
   flex-direction: column-reverse;
 }
 
+.padding {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+@media screen and (max-width: 639px) {
+  .padding {
+    padding-left: 17.5px;
+    padding-right: 17.5px;
+  }
+}
 .home {
   font-size: 14px;
   min-height: 100vh;
@@ -54,6 +65,10 @@ body {
 .theme--light .home {
   background-color: hsl(0, 0%, 98%);
 }
+.home-options {
+  padding-top: 45px;
+  padding-bottom: 45px;
+}
 
 .detail {
   font-size: 16px;
@@ -62,8 +77,6 @@ body {
 .header header {
   height: 80px;
   width: 100vw;
-  padding-left: 80px;
-  padding-right: 80px;
 }
 .theme--dark .header header {
   background-color: hsl(209, 23%, 22%);
@@ -87,4 +100,14 @@ body {
 .header-logo {
   font-weight: 600;
   font-size: 22px;
+}
+
+@media screen and (max-width: 639px) {
+  .header header {
+    height: 80px;
+    width: 100vw;
+  }
+  .header-logo {
+    font-size: 16px;
+  }
 }/*# sourceMappingURL=style.css.map */

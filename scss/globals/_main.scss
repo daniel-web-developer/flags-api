@@ -41,8 +41,20 @@ body{
     }
 }
 
+.padding{
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
 @media screen and (max-width: 375px){
 
+}
+
+@media screen and (max-width: 639px){
+    .padding{
+        padding-left: 17.5px;
+        padding-right: 17.5px;
+    }
 }
 
 @media screen and (min-width: 376px) and (max-width: 1024px){

@@ -7,4 +7,9 @@
     @include themed(){
         background-color: t("bg");
     }
+
+    &-options{
+        padding-top: 45px;
+        padding-bottom: 45px;
+    }
 }
