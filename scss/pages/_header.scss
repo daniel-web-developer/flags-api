@@ -1,0 +1,31 @@
+@use '../globals/themes' as *;
+
+.header{
+    header{
+        height: 80px;
+        width: 100vw;
+    
+        padding-left: 80px;
+        padding-right: 80px;
+
+        @include themed(){
+            background-color: t("elements");
+            color: t("text");
+        }
+
+        button{
+            border: none;
+            background-color: transparent;
+            font-size: 1em;
+            
+            @include themed(){
+                color: t("text");
+            }
+        }
+    }
+
+    &-logo{
+        font-weight: 600;
+        font-size: 22px;
+    }
+}
