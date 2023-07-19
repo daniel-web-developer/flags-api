@@ -12,4 +12,68 @@
         padding-top: 45px;
         padding-bottom: 45px;
     }
+    
+    &-search{
+        height: 50px;
+        min-width: 340px;
+        width: 455px;
+        padding-left: 50px;
+        margin-left: -14px;
+        border: none;
+        border-radius: 5px;
+        
+        @include themed(){
+            background-color: t("elements");
+            color: t("text");
+        }
+
+        &-svg{
+            position: relative;
+            left: 20px;
+
+            @include themed(){
+                fill: t("text");
+            }
+        }
+
+        &:focus{
+            outline: none;
+        }
+
+        &::placeholder{
+            opacity: 1;
+        }
+    }
+
+    select{
+        height: 50px;
+        width: 190px;
+        padding: 0 20px 0 20px;
+        border: none;
+        border-radius: 5px;
+
+        @include themed(){
+            background-color: t("elements");
+            color: t("text");
+        }
+
+        option{
+            border-radius: 5px;
+
+            @include themed(){
+                background-color: t("elements");
+                color: t("text");
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 809px){
+    .mobile{
+        flex-direction: column;
+
+        &-search{
+            margin-bottom: 40px;
+        }
+    }
 }

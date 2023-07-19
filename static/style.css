@@ -69,7 +69,77 @@ body {
   padding-top: 45px;
   padding-bottom: 45px;
 }
+.home-search {
+  height: 50px;
+  min-width: 340px;
+  width: 455px;
+  padding-left: 50px;
+  margin-left: -14px;
+  border: none;
+  border-radius: 5px;
+}
+.theme--dark .home-search {
+  background-color: hsl(209, 23%, 22%);
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .home-search {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(200, 15%, 8%);
+}
+.home-search-svg {
+  position: relative;
+  left: 20px;
+}
+.theme--dark .home-search-svg {
+  fill: hsl(0, 0%, 100%);
+}
+.theme--light .home-search-svg {
+  fill: hsl(200, 15%, 8%);
+}
+.home-search:focus {
+  outline: none;
+}
+.home-search::-moz-placeholder {
+  opacity: 1;
+}
+.home-search::placeholder {
+  opacity: 1;
+}
+.home select {
+  height: 50px;
+  width: 190px;
+  padding: 0 20px 0 20px;
+  border: none;
+  border-radius: 5px;
+}
+.theme--dark .home select {
+  background-color: hsl(209, 23%, 22%);
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .home select {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(200, 15%, 8%);
+}
+.home select option {
+  border-radius: 5px;
+}
+.theme--dark .home select option {
+  background-color: hsl(209, 23%, 22%);
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .home select option {
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(200, 15%, 8%);
+}
 
+@media screen and (max-width: 809px) {
+  .mobile {
+    flex-direction: column;
+  }
+  .mobile-search {
+    margin-bottom: 40px;
+  }
+}
 .detail {
   font-size: 16px;
 }
