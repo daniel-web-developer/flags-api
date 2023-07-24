@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import Layout from './components/layout.js'
 
 const urlAll = 'https://restcountries.com/v3.1/all'
@@ -6,10 +8,9 @@ const urlAll = 'https://restcountries.com/v3.1/all'
 export async function getAll(){
   const res = await fetch(urlAll);
   const data = await res.json();
-  const oneCountry = data[0];
 
   const countries = data.map(({ name, postalcode, flags, population, region, capital }) => (
-    <a key={postalcode} className='country-block'>
+    <a href={'details/' + name.common.toLowerCase()} key={postalcode} className='country-block'>
         <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
         <div className='country-text'>
           <p className='country-text-title'>{name.common}</p>
@@ -34,7 +35,6 @@ export async function getAll(){
 }
 
 export default function Home() {
-  getAll()  
   return (
     <Layout>
       <div className='home padding'>
