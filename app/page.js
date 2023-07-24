@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import Layout from './components/layout.js'
 
 const urlAll = 'https://restcountries.com/v3.1/all'
@@ -10,17 +9,17 @@ export async function getAll(){
   const data = await res.json();
 
   const countries = data.map(({ name, postalcode, flags, population, region, capital }) => (
-    <a href={'details/' + name.common.toLowerCase()} key={postalcode} className='country-block'>
-        <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
-        <div className='country-text'>
-          <p className='country-text-title'>{name.common}</p>
-          <div className='country-text-description'>
-            <p><span>Population: </span>{population.toLocaleString()}</p>
-            <p><span>Region: </span>{region}</p>
-            <p><span>Capital: </span>{capital}</p>
-          </div>
+    <Link href={'/details/' + name.common.toLowerCase()} key={postalcode} className='country-block'>
+      <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
+      <div className='country-text'>
+        <p className='country-text-title'>{name.common}</p>
+        <div className='country-text-description'>
+          <p><span>Population: </span>{population.toLocaleString()}</p>
+          <p><span>Region: </span>{region}</p>
+          <p><span>Capital: </span>{capital}</p>
         </div>
-      </a>
+      </div>
+    </Link>
   ))
 
   console.log(data[0]);

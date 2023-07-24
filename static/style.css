@@ -21,8 +21,13 @@ html {
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+main {
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 .flex {
@@ -221,6 +226,35 @@ body {
 }
 .detail {
   font-size: 16px;
+  min-height: 100vh;
+}
+.theme--dark .detail {
+  background-color: hsl(207, 26%, 17%);
+}
+.theme--light .detail {
+  background-color: hsl(0, 0%, 98%);
+}
+.detail-image {
+  height: auto;
+  width: 530px;
+}
+.detail-padding {
+  padding-top: 75px;
+}
+.detail-back {
+  height: 40px;
+  width: 130px;
+  text-decoration: none;
+  margin-bottom: 75px;
+  align-items: center;
+}
+.theme--dark .detail-back {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(209, 23%, 22%);
+}
+.theme--light .detail-back {
+  color: hsl(200, 15%, 8%);
+  background-color: hsl(0, 0%, 100%);
 }
 
 .header header {
@@ -249,6 +283,13 @@ body {
 .header-logo {
   font-weight: 600;
   font-size: 22px;
+  text-decoration: none;
+}
+.theme--dark .header-logo {
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .header-logo {
+  color: hsl(200, 15%, 8%);
 }
 
 @media screen and (max-width: 639px) {

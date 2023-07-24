@@ -24,6 +24,12 @@
     &-logo{
         font-weight: 600;
         font-size: 22px;
+        
+        text-decoration: none;
+
+        @include themed(){
+            color: t("text");
+        }
     }
 }
 

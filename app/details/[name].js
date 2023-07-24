@@ -1,9 +1,10 @@
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import Layout from '../../components/layout.js'
 
 export async function getCountry(){
     const router = useRouter();
-    const { name } = router.query;
-    const urlCountry = 'https://restcountries.com/v3.1/name/{name}'
+    const name = router.query;
+    const urlCountry = 'https://restcountries.com/v3.1/name/' + name
 
     const res = await fetch(urlCountry);
     const data = await res.json();
@@ -17,7 +18,8 @@ export default function Detail() {
     return (
       <Layout>
         <div>
-            {getCountry}
+          a
+          {getCountry}
         </div>
       </Layout>
     )
