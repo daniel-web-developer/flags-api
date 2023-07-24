@@ -1,7 +1,40 @@
 import Image from 'next/image'
 import Layout from './components/layout.js'
 
+const urlAll = 'https://restcountries.com/v3.1/all'
+
+export async function getAll(){
+  const res = await fetch(urlAll);
+  const data = await res.json();
+  const oneCountry = data[0];
+
+  const countries = data.map(({ name, postalcode, flags, population, region, capital }) => (
+    <a key={postalcode} className='country-block'>
+        <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
+        <div className='country-text'>
+          <p className='country-text-title'>{name.common}</p>
+          <div className='country-text-description'>
+            <p><span>Population: </span>{population.toLocaleString()}</p>
+            <p><span>Region: </span>{region}</p>
+            <p><span>Capital: </span>{capital}</p>
+          </div>
+        </div>
+      </a>
+  ))
+
+  console.log(data[0]);
+  console.log(Object.keys(data[0]));
+
+  return(
+    // <div className='flex flex-justcont-sb country'>{country}</div>
+    <div className='flex flex-justcont-sb country'>
+      {countries}
+    </div>
+  )
+}
+
 export default function Home() {
+  getAll()  
   return (
     <Layout>
       <div className='home padding'>
@@ -20,7 +53,9 @@ export default function Home() {
             <option value="oceania">Oceania</option>
           </select>
         </div>
-
+        <div className='flex'>
+          {getAll()}
+        </div>
       </div>
     </Layout>
   )

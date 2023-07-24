@@ -55,6 +55,20 @@ body {
     padding-right: 17.5px;
   }
 }
+:root {
+  --text: hsl(200, 15%, 8%);
+  --elements: hsl(0, 0%, 100%);
+  --input: hsl(0, 0%, 52%);
+  --bg: hsl(0, 0%, 98%);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: hsl(207, 26%, 17%);
+    --text: hsl(0, 0%, 100%);
+    --elements: hsl(209, 23%, 22%);
+  }
+}
+
 .home {
   font-size: 14px;
   min-height: 100vh;
@@ -132,6 +146,70 @@ body {
   color: hsl(200, 15%, 8%);
 }
 
+.country {
+  flex-wrap: wrap;
+  margin-right: -70px;
+}
+.country-block {
+  display: block;
+  height: 320px;
+  width: 250px;
+  margin-right: 70px;
+  margin-bottom: 70px;
+  border-radius: 5px;
+}
+.theme--dark .country-block {
+  background-color: hsl(209, 23%, 22%);
+}
+.theme--light .country-block {
+  background-color: hsl(0, 0%, 100%);
+}
+.country-text {
+  padding: 25px;
+}
+.country-text-title {
+  font-weight: 600;
+  font-size: 1rem;
+  padding-bottom: 10px;
+}
+.country-text-description {
+  font-size: 0.8rem;
+}
+.country-text-description span {
+  font-weight: 600;
+}
+.country-text-description p {
+  padding-bottom: 5px;
+}
+.country-text-description p:last-child {
+  padding-bottom: 0;
+}
+.theme--dark .country-text {
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .country-text {
+  color: hsl(200, 15%, 8%);
+}
+.country-image {
+  height: 150px;
+  width: 250px;
+  border-radius: 5px 5px 0 0;
+}
+
+@media screen and (max-width: 609px) {
+  .mobile {
+    flex-direction: column;
+  }
+  .mobile-search {
+    margin-bottom: 40px;
+  }
+  .country {
+    justify-content: center;
+  }
+  .country-block {
+    margin-bottom: 40px;
+  }
+}
 @media screen and (max-width: 809px) {
   .mobile {
     flex-direction: column;
