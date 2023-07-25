@@ -127,14 +127,6 @@
 }
 
 @media screen and (max-width: 609px){
-    .mobile{
-        flex-direction: column;
-
-        &-search{
-            margin-bottom: 40px;
-        }
-    }
-
     .country{
         justify-content: center;
 
