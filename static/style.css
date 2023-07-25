@@ -54,6 +54,20 @@ main {
   padding-right: 80px;
 }
 
+.loading {
+  width: 100%;
+}
+.theme--dark .loading {
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .loading {
+  color: hsl(200, 15%, 8%);
+}
+
+.material-symbols-outlined-dark {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
 @media screen and (max-width: 639px) {
   .padding {
     padding-left: 17.5px;
@@ -256,6 +270,30 @@ main {
   color: hsl(200, 15%, 8%);
   background-color: hsl(0, 0%, 100%);
 }
+.detail-back span {
+  padding-right: 4px;
+}
+.detail-text {
+  min-width: 530px;
+}
+.theme--dark .detail-text {
+  color: hsl(0, 0%, 100%);
+}
+.theme--light .detail-text {
+  color: hsl(200, 15%, 8%);
+}
+.detail-text-title {
+  font-size: 32px;
+  font-weight: 600;
+  padding-bottom: 30px;
+}
+.detail-text-category {
+  font-size: 14px;
+  padding-bottom: 15px;
+}
+.detail-text-category span {
+  font-weight: 600;
+}
 
 .header header {
   height: 80px;
@@ -279,6 +317,9 @@ main {
 }
 .theme--light .header header button {
   color: hsl(200, 15%, 8%);
+}
+.header header button span {
+  padding-right: 4px;
 }
 .header-logo {
   font-weight: 600;

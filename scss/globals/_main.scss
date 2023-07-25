@@ -1,5 +1,5 @@
 @use 'typography' as *;
-@use 'themes';
+@use 'themes' as *;
 
 html{
     box-sizing: border-box;
@@ -49,6 +49,22 @@ main{
 .padding{
     padding-left: 80px;
     padding-right: 80px;
+}
+
+.loading{
+    width: 100%;
+    
+    @include themed(){
+        color: t("text");
+    }
+}
+
+.material-symbols-outlined-dark {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
 }
 
 @media screen and (max-width: 375px){

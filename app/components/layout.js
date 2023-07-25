@@ -16,7 +16,8 @@ export default function Layout({ children }){
                 <div className="header">
                     <header className="flex flex-justcont-sb flex-alignit-c padding">
                         <Link href='/' className="header-logo">Where in the world?</Link>
-                        <button onClick={changeTheme}>{theme == "dark" ? "Light mode" : "Dark mode"}</button>
+                        <button onClick={changeTheme} className='flex flex-alignit-c'>{theme == "dark" ? <span className="material-symbols-outlined">light_mode</span> : <span className="material-symbols-outlined material-symbols-outlined-dark">dark_mode</span>}
+                        {theme == "dark" ? "Light mode" : "Dark mode"}</button>
                     </header>
                 </div>
                 <main>{children}</main>

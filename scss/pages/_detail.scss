@@ -30,5 +30,33 @@
             color: t("text");
             background-color: t("elements");
         }
+
+        span{
+            padding-right: 4px;
+        }
+    }
+
+    &-text{
+        min-width: 530px;
+
+        @include themed(){
+            color: t("text");
+        }
+
+        &-title{
+            font-size: 32px;
+            font-weight: 600;
+
+            padding-bottom: 30px;
+        }
+
+        &-category{
+            font-size: 14px;
+            padding-bottom: 15px;
+            
+            span{
+                font-weight: 600;
+            }
+        }
     }
 }

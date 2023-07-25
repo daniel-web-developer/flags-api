@@ -18,7 +18,12 @@
             @include themed(){
                 color: t("text");
             }
+            
+            span{
+                padding-right: 4px;
+            }
         }
+
     }
 
     &-logo{
@@ -31,6 +36,7 @@
             color: t("text");
         }
     }
+
 }
 
 @media screen and (max-width: 639px){

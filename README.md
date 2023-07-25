@@ -36,3 +36,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 https://medium.com/@katiemctigue/how-to-create-a-dark-mode-in-sass-609f131a3995
 
 https://nextjs.org/docs/app/building-your-application/routing/router-handlers
+
+https://github.com/catherineisonline/rest-countries
+https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect

@@ -1,15 +1,39 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
 import Layout from './components/layout.js'
+import { useState, useEffect } from 'react'
 
 const urlAll = 'https://restcountries.com/v3.1/all'
 
-export async function getAll(){
-  const res = await fetch(urlAll);
-  const data = await res.json();
+function getAll(){
+  const [isLoading, setLoading] = useState(true);
+  const [countries, setCountries] = useState([]);
 
-  const countries = data.map(({ name, postalcode, flags, population, region, capital }) => (
-    <Link href={'/details/' + name.common.toLowerCase()} key={postalcode} className='country-block'>
+  const fetchAll = async () => {
+    try{
+      const res = await fetch(urlAll);
+      const data = await res.json();
+      setLoading(false);
+      setCountries(data);
+    }
+    catch (error){
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    let mounted = true;
+    fetchAll().then((items) => {
+      if (mounted){
+        fetchAll(items);
+      }
+    });
+    return () => (mounted = false);
+  }, []);
+
+  const allCountries = countries.map(({ name, flags, population, region, capital }) => (
+    <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
       <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
       <div className='country-text'>
         <p className='country-text-title'>{name.common}</p>
@@ -22,13 +46,16 @@ export async function getAll(){
     </Link>
   ))
 
-  console.log(data[0]);
-  console.log(Object.keys(data[0]));
+  if (isLoading) return(
+    <div className='flex flex-justcont-c loading'>
+      <h1>Loading...</h1>
+    </div>
+  )
 
   return(
     // <div className='flex flex-justcont-sb country'>{country}</div>
     <div className='flex flex-justcont-sb country'>
-      {countries}
+      {allCountries}
     </div>
   )
 }
