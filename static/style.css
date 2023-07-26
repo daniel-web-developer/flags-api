@@ -288,6 +288,10 @@ main {
 .detail-text-category span {
   font-weight: 600;
 }
+.detail-border-text {
+  font-size: 14px;
+  font-weight: 600;
+}
 
 @media screen and (max-width: 1200px) {
   .breakpoint {

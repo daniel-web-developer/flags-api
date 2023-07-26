@@ -60,6 +60,17 @@
                 font-weight: 600;
             }
         }
+
+    }
+
+    &-border{
+        @include themed(){
+            // background-color: t("bg");
+        }        
+        &-text{
+            font-size: 14px;
+            font-weight: 600;
+        }
     }
 }
 

@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react'
 function getCountry(country){
   const [isLoading, setLoading] = useState(true);
   const [oneCountry, setOneCountry] = useState([]);
+  const [countryName, setCountryName] = useState();
 
   const urlCountry = 'https://restcountries.com/v3.1/name/' + country
 
@@ -22,6 +23,23 @@ function getCountry(country){
     }
   };
 
+  const fetchByCode = async (code) => {
+    const urlCode = 'https://restcountries.com/v3.1/alpha/' + code
+    try{
+      const res = await fetch(urlCode);
+      const data = await res.json();
+      data.map(({ name }) => {
+        const realName = name.common
+        // setCountryName(name.common)
+        console.log(realName)
+        return name.common
+      })
+    }
+    catch (error){
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     let mounted = true;
     fetchCountry().then((items) => {
@@ -31,6 +49,10 @@ function getCountry(country){
     });
     return () => (mounted = false);
   }, []);
+
+  // const countryName = countryCode.map(({ name }) => {
+  //   console.log(name.common);
+  // })
 
   const allLanguages = oneCountry.map(({ languages }) => {
     let count = 0;
@@ -48,7 +70,28 @@ function getCountry(country){
     return allTheLanguages;
   })
 
-  const countryData = oneCountry.map(({ name, nameNative, flags, population, region, subregion, capital, tld, currencies, languages }) => (
+  const borderCountries = oneCountry.map(({ borders }) => {
+    const countriesValues = Object.values(borders)
+    const numberCountries = (Object.keys(borders).length) - 1;
+    let i = 0;
+
+    console.log(numberCountries)
+    
+    if (borders == undefined){
+      return(
+        <p>No countries</p>
+      )
+    }
+    else{
+      countriesValues.map((country) => {
+        // fetchByCode(country)
+        console.log(fetchByCode(country))
+      })
+    }
+
+  })
+
+  const countryData = oneCountry.map(({ name, flags, population, region, subregion, capital, tld, currencies, borders }) => (
     <div key={name} className='flex flex-justcont-sb flex-alignit-c detail-mobile'>
       <div className='detail-image-mobile'>
         <Image src={flags.png} alt={name.common + " flag"} height={380} width={530} className='detail-image'/>
@@ -68,6 +111,9 @@ function getCountry(country){
             <p className='detail-text-category'><span>Currencies: </span>{Object.values(currencies).map(({name}) => { return name})}</p>
             <p className='detail-text-category'><span>Languages: </span>{allLanguages}</p>
           </div>
+        </div>
+        <div className='flex detail-border'>
+          <p className='detail-border-text'>Border Countries: </p> {borderCountries}
         </div>
       </div>
     </div>
