@@ -87,6 +87,13 @@
             background-color: t("elements");
         }
 
+        transition: all 150ms ease-in-out;
+
+        &:hover{
+            @include themed(){
+                background-color: t("hover");
+            }
+        }
     }
 
     &-text{

@@ -177,12 +177,19 @@ main {
   margin-bottom: 70px;
   text-decoration: none;
   border-radius: 5px;
+  transition: all 150ms ease-in-out;
 }
 .theme--dark .country-block {
   background-color: hsl(209, 23%, 22%);
 }
 .theme--light .country-block {
   background-color: hsl(0, 0%, 100%);
+}
+.theme--dark .country-block:hover {
+  background-color: hsl(208, 23%, 30%);
+}
+.theme--light .country-block:hover {
+  background-color: hsl(0, 0%, 90%);
 }
 .country-text {
   padding: 25px;
@@ -288,9 +295,44 @@ main {
 .detail-text-category span {
   font-weight: 600;
 }
+.detail-border {
+  padding-top: 32px;
+}
 .detail-border-text {
   font-size: 14px;
+}
+.detail-border-text-main {
+  font-size: 14px;
   font-weight: 600;
+}
+.detail-border-text-none {
+  padding-left: 2px;
+}
+.detail-border-countries {
+  max-width: 20vw;
+  flex-wrap: wrap;
+}
+.detail-border-countries a {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 12px;
+  margin-left: 8px;
+  text-decoration: none;
+  transition: all 150ms ease-in-out;
+}
+.theme--dark .detail-border-countries a {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(209, 23%, 22%);
+}
+.theme--light .detail-border-countries a {
+  color: hsl(200, 15%, 8%);
+  background-color: hsl(0, 0%, 100%);
+}
+.theme--dark .detail-border-countries a:hover {
+  background-color: hsl(208, 23%, 30%);
+}
+.theme--light .detail-border-countries a:hover {
+  background-color: hsl(0, 0%, 90%);
 }
 
 @media screen and (max-width: 1200px) {
@@ -330,6 +372,11 @@ main {
   }
   .detail-text-title {
     font-size: 24px;
+  }
+}
+@media screen and (max-width: 809px) {
+  .detail-border-countries {
+    max-width: calc(100vw - 35px);
   }
 }
 @media screen and (min-width: 640px) and (max-width: 809px) {

@@ -7,48 +7,39 @@ import { useState, useEffect } from 'react'
 function getCountry(country){
   const [isLoading, setLoading] = useState(true);
   const [oneCountry, setOneCountry] = useState([]);
-  const [countryName, setCountryName] = useState();
+  const [borderCountry, setBorderCountry] = useState([]);
 
   const urlCountry = 'https://restcountries.com/v3.1/name/' + country
 
-  const fetchCountry = async () => {
-    try{
-      const res = await fetch(urlCountry);
-      const data = await res.json();
-      setLoading(false);
-      setOneCountry(data);
-    }
-    catch (error){
-      console.log(error);
-    }
-  };
-
-  const fetchByCode = async (code) => {
-    const urlCode = 'https://restcountries.com/v3.1/alpha/' + code
-    try{
-      const res = await fetch(urlCode);
-      const data = await res.json();
-      data.map(({ name }) => {
-        const realName = name.common
-        // setCountryName(name.common)
-        console.log(realName)
-        return name.common
-      })
-    }
-    catch (error){
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
-    let mounted = true;
-    fetchCountry().then((items) => {
-      if (mounted){
-        fetchCountry(items);
+    const fetchCountry = async () => {
+      try{
+        const res = await fetch(urlCountry);
+        const data = await res.json();
+        setLoading(false);
+        setOneCountry(data);
+        data[0]?.borders?.forEach((border) => {
+          return fetchByCode(border);
+        })
       }
-    });
-    return () => (mounted = false);
-  }, []);
+      catch (error){
+        console.log(error);
+      }
+    };
+    fetchCountry(country)
+
+    const fetchByCode = async (code) => {
+      try{
+        const urlCode = 'https://restcountries.com/v3.1/alpha/' + code
+        const res = await fetch(urlCode);
+        const data = await res.json();
+        setBorderCountry((cur) => [...cur, data[0].name.common])
+      }
+      catch (error){
+        console.log(error);
+      }
+    };
+  }, [country])
 
   // const countryName = countryCode.map(({ name }) => {
   //   console.log(name.common);
@@ -68,27 +59,6 @@ function getCountry(country){
       }
     })
     return allTheLanguages;
-  })
-
-  const borderCountries = oneCountry.map(({ borders }) => {
-    const countriesValues = Object.values(borders)
-    const numberCountries = (Object.keys(borders).length) - 1;
-    let i = 0;
-
-    console.log(numberCountries)
-    
-    if (borders == undefined){
-      return(
-        <p>No countries</p>
-      )
-    }
-    else{
-      countriesValues.map((country) => {
-        // fetchByCode(country)
-        console.log(fetchByCode(country))
-      })
-    }
-
   })
 
   const countryData = oneCountry.map(({ name, flags, population, region, subregion, capital, tld, currencies, borders }) => (
@@ -113,7 +83,16 @@ function getCountry(country){
           </div>
         </div>
         <div className='flex detail-border'>
-          <p className='detail-border-text'>Border Countries: </p> {borderCountries}
+          <p className='detail-border-text-main'>Border Countries: </p>
+          <div className='flex detail-border-countries'>{
+          borders == undefined ? (
+            <p className='detail-border-text detail-border-text-none'>No borders</p>
+          )
+          :
+          borderCountry.map((country) => {
+            return <Link href={'/details/' + country} key={country} className=''>{country}</Link>
+          })}
+          </div>
         </div>
       </div>
     </div>

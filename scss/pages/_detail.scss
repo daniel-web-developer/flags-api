@@ -64,12 +64,52 @@
     }
 
     &-border{
+        padding-top: 32px;
+
         @include themed(){
             // background-color: t("bg");
-        }        
+        }
+
         &-text{
             font-size: 14px;
-            font-weight: 600;
+
+            &-main{
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            &-none{
+                padding-left: 2px;
+            }
+        }
+
+        &-countries{
+            max-width: 20vw;
+            flex-wrap: wrap;
+            
+            a{
+                border-radius: 5px;
+                padding: 10px;
+
+                @include themed(){
+                    color: t("text");
+                    background-color: t("elements");
+                }
+
+                font-size: 12px;
+                margin-left: 8px;
+
+                text-decoration: none;
+
+                transition: all 150ms ease-in-out;
+
+                &:hover{
+                    @include themed(){
+                        background-color: t("hover");
+                    }
+
+                }
+            }
         }
     }
 }
@@ -122,6 +162,16 @@
 
             &-title{
                 font-size: 24px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 809px){
+    .detail{
+        &-border{
+            &-countries{
+                max-width: calc(100vw - 35px);
             }
         }
     }
