@@ -6,13 +6,29 @@ import { useState, useEffect } from 'react'
 
 const urlAll = 'https://restcountries.com/v3.1/all'
 
-function getAll(){
+function getCountries(value){
   const [isLoading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
 
+  console.log(value);
+
   const fetchAll = async () => {
     try{
+      setLoading(true);
       const res = await fetch(urlAll);
+      const data = await res.json();
+      setLoading(false);
+      setCountries(data);
+    }
+    catch (error){
+      console.log(error);
+    }
+  };
+
+  const fetchByName = async (value) => {
+    try{
+      const urlName = 'https://restcountries.com/v3.1/name/' + value
+      const res = await fetch(urlName);
       const data = await res.json();
       setLoading(false);
       setCountries(data);
@@ -24,15 +40,20 @@ function getAll(){
 
   useEffect(() => {
     let mounted = true;
-    fetchAll().then((items) => {
-      if (mounted){
-        fetchAll(items);
-      }
-    });
-    return () => (mounted = false);
-  }, []);
+    if (value == ''){
+      fetchAll().then((items) => {
+        if (mounted){
+          fetchAll(items);
+        }
+      });
+      return () => (mounted = false);
+    }
+    else{
+      fetchByName(value)
+    }
+  }, [value]);
 
-  const allCountries = countries.map(({ name, flags, population, region, capital }) => (
+  const returnCountries = countries.map(({ name, flags, population, region, capital }) => (
     <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
       <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
       <div className='country-text'>
@@ -46,6 +67,7 @@ function getAll(){
     </Link>
   ))
 
+
   if (isLoading) return(
     <div className='flex flex-justcont-c loading'>
       <h1>Loading...</h1>
@@ -53,21 +75,24 @@ function getAll(){
   )
 
   return(
-    // <div className='flex flex-justcont-sb country'>{country}</div>
     <div className='flex flex-justcont-sb country'>
-      {allCountries}
+      {returnCountries}
     </div>
   )
 }
 
 export default function Home() {
+  const [search, setSearch] = useState('');
+  const changeSearch = (event) => {
+    setSearch(event.target.value)
+  }
   return (
     <Layout>
       <div className='home padding'>
         <div className='flex flex-justcont-sb home-options mobile'>
           <div className='flex flex-alignit-c mobile-search'>
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" className='home-search-svg'>{/* Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. */}<path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-            <input type='text' placeholder='Search for a country...' className='home-search'>
+            <input type='search' id='search' placeholder='Search for a country...' onChange={changeSearch} className='home-search'>
             </input>
           </div>
           <select>
@@ -80,7 +105,7 @@ export default function Home() {
           </select>
         </div>
         <div className='flex'>
-          {getAll()}
+          {getCountries(search)}
         </div>
       </div>
     </Layout>
