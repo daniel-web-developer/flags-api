@@ -41,26 +41,6 @@ function getCountry(country){
     };
   }, [country])
 
-  // const countryName = countryCode.map(({ name }) => {
-  //   console.log(name.common);
-  // })
-
-  const allLanguages = oneCountry.map(({ languages }) => {
-    let count = 0;
-    let allTheLanguages = '';
-
-    Object.values(languages).map((name) => {
-      count++;
-      if (count < Object.keys(languages).length){
-        allTheLanguages += name + ', ';
-      }
-      else{
-        allTheLanguages += name;
-      }
-    })
-    return allTheLanguages;
-  })
-
   const countryData = oneCountry.map(({ name, flags, population, region, subregion, capital, tld, currencies, borders }) => (
     <div key={name} className='flex flex-justcont-sb flex-alignit-c detail-mobile'>
       <div className='detail-image-mobile'>
@@ -78,8 +58,41 @@ function getCountry(country){
           </div>
           <div>
             <p className='detail-text-category'><span>Top Level Domain: </span>{tld}</p>
-            <p className='detail-text-category'><span>Currencies: </span>{Object.values(currencies).map(({name}) => { return name})}</p>
-            <p className='detail-text-category'><span>Languages: </span>{allLanguages}</p>
+            <p className='detail-text-category'><span>Currencies: </span>{
+              oneCountry.map(({ currencies }) => {
+                let count = 0
+                let currencyString = '';
+                
+                Object.values(currencies).map(({name}) => {
+                count++;
+  
+                if (count < Object.keys(currencies).length){
+                  currencyString += name + ', ';
+                }
+                else{
+                  currencyString += name;
+                }
+              })
+
+              return currencyString})
+            }
+            
+            </p>
+            <p className='detail-text-category'><span>Languages: </span>{oneCountry.map(({ languages }) => {
+              let count = 0;
+              let allTheLanguages = '';
+
+              Object.values(languages).map((name) => {
+                count++;
+                if (count < Object.keys(languages).length){
+                  allTheLanguages += name + ', ';
+                }
+                else{
+                  allTheLanguages += name;
+                }
+              })
+              return allTheLanguages;
+            })}</p>
           </div>
         </div>
         <div className='flex detail-border'>

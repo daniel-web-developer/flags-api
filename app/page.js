@@ -6,41 +6,62 @@ import { useState, useEffect } from 'react'
 
 const urlAll = 'https://restcountries.com/v3.1/all'
 
-function getCountries(value){
+function getCountries(searchValue, regionValue){
   const [isLoading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
-
-  console.log(value);
 
   const fetchAll = async () => {
     try{
       setLoading(true);
       const res = await fetch(urlAll);
       const data = await res.json();
-      setLoading(false);
       setCountries(data);
+      setLoading(false);
     }
     catch (error){
       console.log(error);
     }
   };
 
-  const fetchByName = async (value) => {
+  const fetchByName = async (searchValue) => {
     try{
-      const urlName = 'https://restcountries.com/v3.1/name/' + value
+      setLoading(true);
+      const urlName = 'https://restcountries.com/v3.1/name/' + searchValue
       const res = await fetch(urlName);
       const data = await res.json();
-      setLoading(false);
       setCountries(data);
+      setLoading(false);
     }
     catch (error){
       console.log(error);
     }
   };
+
+  const fetchByRegion = async (regionFilter) => {
+    try{
+      setLoading(true);
+      const urlRegion = 'https://restcountries.com/v3.1/region/' + regionFilter
+      const res = await fetch(urlRegion);
+      const data = await res.json();
+      setCountries(data);
+      setLoading(false);
+    }
+    catch (error){
+      console.log(error);
+    }
+  };
+
+  function filterByRegion(regionFilter){
+    const filtering = countries.filter((country) => {
+      Object.values(country)
+        .includes(regionFilter);
+    })
+    return filtering;
+  }
 
   useEffect(() => {
     let mounted = true;
-    if (value == ''){
+    if (searchValue == '' & regionValue == ''){
       fetchAll().then((items) => {
         if (mounted){
           fetchAll(items);
@@ -48,25 +69,26 @@ function getCountries(value){
       });
       return () => (mounted = false);
     }
-    else{
-      fetchByName(value)
+
+    if (searchValue != '' & regionValue != ''){
+
     }
-  }, [value]);
 
-  const returnCountries = countries.map(({ name, flags, population, region, capital }) => (
-    <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
-      <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
-      <div className='country-text'>
-        <p className='country-text-title'>{name.common}</p>
-        <div className='country-text-description'>
-          <p><span>Population: </span>{population.toLocaleString()}</p>
-          <p><span>Region: </span>{region}</p>
-          <p><span>Capital: </span>{capital}</p>
-        </div>
-      </div>
-    </Link>
-  ))
+    if (searchValue != ''){
+      fetchByName(searchValue)
+    }
 
+    if (regionValue != ''){
+      fetchByRegion(regionValue);
+    }
+
+  }, [searchValue, regionValue]);
+
+  if (countries == undefined){
+    return(
+      <p>No countries found.</p>
+    )
+  }
 
   if (isLoading) return(
     <div className='flex flex-justcont-c loading'>
@@ -74,18 +96,47 @@ function getCountries(value){
     </div>
   )
 
-  return(
-    <div className='flex flex-justcont-sb country'>
-      {returnCountries}
-    </div>
-  )
+  if (countries.message == 'Not Found'){
+    return(
+      <p className='country-notfound'>No countries found.</p>
+    )
+  }
+  else{
+    console.log(countries);
+    console.log(countries.message);
+    const returnCountries = countries.map(({ name, flags, population, region, capital }) => (
+      <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
+        <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
+        <div className='country-text'>
+          <p className='country-text-title'>{name.common}</p>
+          <div className='country-text-description'>
+            <p><span>Population: </span>{population.toLocaleString()}</p>
+            <p><span>Region: </span>{region}</p>
+            <p><span>Capital: </span>{capital}</p>
+          </div>
+        </div>
+      </Link>
+    ))
+    return(
+      <div className='flex flex-justcont-sb country'>
+        {returnCountries}
+      </div>
+    )
+  }
 }
 
 export default function Home() {
+  const [region, setRegion] = useState('');
   const [search, setSearch] = useState('');
+
   const changeSearch = (event) => {
     setSearch(event.target.value)
   }
+
+  const changeRegion = (event) => {
+    setRegion(event.target.value)
+  }
+
   return (
     <Layout>
       <div className='home padding'>
@@ -95,17 +146,17 @@ export default function Home() {
             <input type='search' id='search' placeholder='Search for a country...' onChange={changeSearch} className='home-search'>
             </input>
           </div>
-          <select>
+          <select onChange={changeRegion}>
             <option value="">Filter by Region</option>
-            <option value="africa">Africa</option>
-            <option value="america">America</option>
-            <option value="asia">Asia</option>
-            <option value="europe">Europe</option>
-            <option value="oceania">Oceania</option>
+            <option value="Africa">Africa</option>
+            <option value="America">America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
           </select>
         </div>
         <div className='flex'>
-          {getCountries(search)}
+          {getCountries(search, region)}
         </div>
       </div>
     </Layout>

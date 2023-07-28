@@ -131,6 +131,14 @@
         width: 250px;
         border-radius: 5px 5px 0 0;
     }
+
+    &-notfound{
+        font-size: 32px;
+
+        @include themed(){
+            color: t("text");
+        }
+    }
 }
 
 @media screen and (max-width: 609px){
