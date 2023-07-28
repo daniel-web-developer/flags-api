@@ -9,6 +9,7 @@ const urlAll = 'https://restcountries.com/v3.1/all'
 function getCountries(searchValue, regionValue){
   const [isLoading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
+  const [searchTemp, setSearchTemp] = useState();
   const [searchResults, setSearchResults] = useState([]);
 
   const fetchAll = async () => {
@@ -24,19 +25,20 @@ function getCountries(searchValue, regionValue){
     }
   };
 
-  // const fetchByName = async (searchValue) => {
-  //   try{
-  //     setLoading(true);
-  //     const urlName = 'https://restcountries.com/v3.1/name/' + searchValue
-  //     const res = await fetch(urlName);
-  //     const data = await res.json();
-  //     setCountries(data);
-  //     setLoading(false);
-  //   }
-  //   catch (error){
-  //     console.log(error);
-  //   }
-  // };
+  const fetchByName = async (searchValue) => {
+    try{
+      console.log(searchValue);
+      setLoading(true);
+      const urlName = 'https://restcountries.com/v3.1/name/' + searchValue
+      const res = await fetch(urlName);
+      const data = await res.json();
+      setCountries(data);
+      setLoading(false);
+    }
+    catch (error){
+      console.log(error);
+    }
+  };
 
   const fetchByRegion = async (regionFilter) => {
     try{
@@ -51,47 +53,41 @@ function getCountries(searchValue, regionValue){
       console.log(error);
     }
   };
+
+  // console.log(searchValue);
   
   const searchCountries = (searchValue) => {
-    if (searchValue != ''){
+    console.log(12345);
+    setSearchTemp(searchValue);
+    console.log(searchTemp);
+
+    if (searchTemp){
       setSearchResults(
         countries.filter((country) => {
           Object.values(country)
             .join("")
             .toLowerCase()
-            .includes(searchValue.toLowerCase())
+            .includes(searchTemp.toLowerCase())
         })
       );
-
-      if (searchResults.length === 0){
-        setSearchResults(countries);
-      }
     }
   }
-
+  
   useEffect(() => {
     let mounted = true;
-    if (regionValue == ''){
-      fetchAll().then((items) => {
-        if (mounted){
-          fetchAll(items);
-        }
-      });
-      return () => (mounted = false);
-    }
-    if (regionValue != ''){
-      fetchByRegion(regionValue);
+
+    if (searchValue != ''){
+      fetchByName(searchValue);
     }
 
-  }, [regionValue]);
-
-
-  if (searchResults == undefined){
-    return(
-      <p>No countries found.</p>
-    )
-  }
-
+    fetchAll().then((items) => {
+      if (mounted){
+        fetchAll(items);
+      }
+    });
+    return () => (mounted = false);
+  }, [searchValue, regionValue]);
+  
   if (isLoading) return(
     <div className='flex flex-justcont-c loading'>
       <h1>Loading...</h1>
@@ -101,7 +97,7 @@ function getCountries(searchValue, regionValue){
   if (countries.message == 'Not Found'){
     return(
       <p className='country-notfound'>No countries found.</p>
-    )
+      )
   }
   else{
     const returnCountries = countries.map(({ name, flags, population, region, capital }) => (
@@ -123,6 +119,7 @@ function getCountries(searchValue, regionValue){
       </div>
     )
   }
+
 }
 
 export default function Home() {
