@@ -9,7 +9,7 @@ function getCountry(country){
   const [oneCountry, setOneCountry] = useState([]);
   const [borderCountry, setBorderCountry] = useState([]);
 
-  const urlCountry = 'https://restcountries.com/v3.1/name/' + country
+  const urlCountry = 'https://restcountries.com/v3.1/name/' + country + '?fullText=true'
 
   useEffect(() => {
     const fetchCountry = async () => {

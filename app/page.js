@@ -9,7 +9,7 @@ const urlAll = 'https://restcountries.com/v3.1/all'
 function getCountries(searchValue, regionValue){
   const [isLoading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
-  const [searchTemp, setSearchTemp] = useState();
+  // const [searchTemp, setSearchTemp] = useState();
   const [searchResults, setSearchResults] = useState([]);
 
   const fetchAll = async () => {
@@ -25,20 +25,19 @@ function getCountries(searchValue, regionValue){
     }
   };
 
-  const fetchByName = async (searchValue) => {
-    try{
-      console.log(searchValue);
-      setLoading(true);
-      const urlName = 'https://restcountries.com/v3.1/name/' + searchValue
-      const res = await fetch(urlName);
-      const data = await res.json();
-      setCountries(data);
-      setLoading(false);
-    }
-    catch (error){
-      console.log(error);
-    }
-  };
+  // const fetchByName = async (searchValue) => {
+  //   try{
+  //     setLoading(true);
+  //     const urlName = 'https://restcountries.com/v3.1/name/' + searchValue
+  //     const res = await fetch(urlName);
+  //     const data = await res.json();
+  //     setCountries(data);
+  //     setLoading(false);
+  //   }
+  //   catch (error){
+  //     console.log(error);
+  //   }
+  // };
 
   const fetchByRegion = async (regionFilter) => {
     try{
@@ -54,39 +53,37 @@ function getCountries(searchValue, regionValue){
     }
   };
 
-  // console.log(searchValue);
-  
   const searchCountries = (searchValue) => {
-    console.log(12345);
-    setSearchTemp(searchValue);
-    console.log(searchTemp);
-
-    if (searchTemp){
-      setSearchResults(
-        countries.filter((country) => {
-          Object.values(country)
-            .join("")
-            .toLowerCase()
-            .includes(searchTemp.toLowerCase())
-        })
-      );
-    }
+    setSearchResults(countries.filter((country) => {
+      Object.values(country.name)
+        .join("")
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+    }))
+    console.log(searchResults);
   }
   
   useEffect(() => {
     let mounted = true;
 
-    if (searchValue != ''){
-      fetchByName(searchValue);
+    if (regionValue != ''){
+      fetchByRegion(regionValue);
     }
-
-    fetchAll().then((items) => {
-      if (mounted){
-        fetchAll(items);
-      }
-    });
-    return () => (mounted = false);
-  }, [searchValue, regionValue]);
+    else{
+      fetchAll().then((items) => {
+        if (mounted){
+          fetchAll(items);
+        }
+      });
+      return () => (mounted = false);
+    }    
+  }, [regionValue]);
+  
+  useEffect(() => {
+    if (searchValue != ''){
+      searchCountries(searchValue);
+    }  
+  }, [searchValue])
   
   if (isLoading) return(
     <div className='flex flex-justcont-c loading'>
@@ -99,6 +96,33 @@ function getCountries(searchValue, regionValue){
       <p className='country-notfound'>No countries found.</p>
       )
   }
+
+  if (searchValue != '' & searchResults.length === 0){
+    return(
+      <p className='country-notfound'>No countries found.</p>
+    )
+  }
+  else if (searchResults.length > 0){
+    const returnCountries = searchResults.map(({ name, flags, population, region, capital }) => (
+      <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
+        <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
+        <div className='country-text'>
+          <p className='country-text-title'>{name.common}</p>
+          <div className='country-text-description'>
+            <p><span>Population: </span>{population.toLocaleString()}</p>
+            <p><span>Region: </span>{region}</p>
+            <p><span>Capital: </span>{capital}</p>
+          </div>
+        </div>
+      </Link>
+    ))
+    return(
+      <div className='flex flex-justcont-sb country'>
+        {returnCountries}
+      </div>
+    )
+  }
+
   else{
     const returnCountries = countries.map(({ name, flags, population, region, capital }) => (
       <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
