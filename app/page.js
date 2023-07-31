@@ -54,14 +54,21 @@ function getCountries(searchValue, regionValue){
   };
 
   const searchCountries = (searchValue) => {
-    setSearchResults(countries.filter((country) => {
-      Object.values(country.name)
+    setLoading(true);
+    countries.map((country) => {
+      // console.log(Object.values(country.name))
+      // console.log(country.name)
+      if (Object.values(country.name)
         .join("")
         .toLowerCase()
-        .includes(searchValue.toLowerCase())
-    }))
+        .includes(searchValue)){
+          setSearchResults(country)
+        }
+    })
     console.log(searchResults);
+    setLoading(false);
   }
+
   
   useEffect(() => {
     let mounted = true;
@@ -82,7 +89,7 @@ function getCountries(searchValue, regionValue){
   useEffect(() => {
     if (searchValue != ''){
       searchCountries(searchValue);
-    }  
+    }
   }, [searchValue])
   
   if (isLoading) return(
@@ -102,7 +109,8 @@ function getCountries(searchValue, regionValue){
       <p className='country-notfound'>No countries found.</p>
     )
   }
-  else if (searchResults.length > 0){
+  
+  if (searchValue != '' & searchResults.length >= 1){
     const returnCountries = searchResults.map(({ name, flags, population, region, capital }) => (
       <Link href={'/details/' + name.common.toLowerCase()} key={name.official} className='country-block'>
         <Image src={flags.png} alt={name.common + " flag"} height={150} width={250} className='country-image' />
@@ -151,7 +159,7 @@ export default function Home() {
   const [search, setSearch] = useState('');
 
   const changeSearch = (event) => {
-    setSearch(event.target.value)
+    setSearch(event.target.value.toLowerCase())
   }
 
   const changeRegion = (event) => {

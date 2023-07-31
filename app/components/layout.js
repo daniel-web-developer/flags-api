@@ -7,7 +7,6 @@ export default function Layout({ children }){
 
     function changeTheme(){
         theme == "dark" ? setTheme("light") : setTheme("dark");
-        console.log(theme);
     }
     
     return(
