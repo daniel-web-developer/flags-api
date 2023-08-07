@@ -9,7 +9,6 @@ const urlAll = 'https://restcountries.com/v3.1/all'
 function getCountries(searchValue, regionValue){
   const [isLoading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
-  // const [searchTemp, setSearchTemp] = useState();
   const [searchResults, setSearchResults] = useState([]);
 
   const fetchAll = async () => {
@@ -24,20 +23,6 @@ function getCountries(searchValue, regionValue){
       console.log(error);
     }
   };
-
-  // const fetchByName = async (searchValue) => {
-  //   try{
-  //     setLoading(true);
-  //     const urlName = 'https://restcountries.com/v3.1/name/' + searchValue
-  //     const res = await fetch(urlName);
-  //     const data = await res.json();
-  //     setCountries(data);
-  //     setLoading(false);
-  //   }
-  //   catch (error){
-  //     console.log(error);
-  //   }
-  // };
 
   const fetchByRegion = async (regionFilter) => {
     try{
@@ -54,17 +39,11 @@ function getCountries(searchValue, regionValue){
   };
 
   const searchCountries = (searchValue) => {
+    console.log(searchValue);
+
     setLoading(true);
-    countries.map((country) => {
-      // console.log(Object.values(country.name))
-      // console.log(country.name)
-      if (Object.values(country.name)
-        .join("")
-        .toLowerCase()
-        .includes(searchValue)){
-          setSearchResults(country)
-        }
-    })
+    setSearchResults(countries.filter(country => country.name.common.toLowerCase().includes(searchValue)));
+
     console.log(searchResults);
     setLoading(false);
   }

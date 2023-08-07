@@ -127,9 +127,6 @@ function getCountry(country){
 export default function Detail({
   params
 }) {
-
-  // getCountry(params.name)
-
   return (
   <Layout>
     <div className='detail padding'>
