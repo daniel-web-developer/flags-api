@@ -1,41 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Mentor - Space tourism website solution
 
-## Getting Started
+This is a solution to the [REST Countries API with color theme switcher challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
-First, run the development server:
+## Table of contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Overview
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### The challenge
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Users should be able to:
 
-## Learn More
+- See all countries from the API on the homepage
+- Search for a country using an `input` field
+- Filter countries by region
+- Click on a country to see more detailed information on a separate page
+- Click through to the border countries on the detail page
+- Toggle the color scheme between light and dark mode *(optional)*
 
-To learn more about Next.js, take a look at the following resources:
+### Screenshot
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+### Links
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Live Site URL]()
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## My process
 
-https://medium.com/@katiemctigue/how-to-create-a-dark-mode-in-sass-609f131a3995
+### Built with
 
-https://nextjs.org/docs/app/building-your-application/routing/router-handlers
+- [Nextjs](https://nextjs.org/)
+- JavaScript
+- JSX
+- [Sass](https://sass-lang.com/)
+- JavaScript
+- Flexbox
+- Desktop-first workflow
 
-https://github.com/catherineisonline/rest-countries
-https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect
+### What I learned
+
+I learned A LOT by coding this project. At first, I thought that using an API was only about fetching it and displaying the contents, as easily as displaying objects in Django, for instance. I was incredibly wrong.
+
+Unlike my other API solutions posted in Frontend Mentor (as is. I may fix them later), this one doesn't have any [hydration problems](https://nextjs.org/docs/messages/react-hydration-error) whatsoever. I learned to use the React hook [useEffect](https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect
+) in order to properly fetch and render the objects with no hydration problems.
+
+I also used, for the first time ever (on an actual project), the [.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) function. Implementing the search function was actually my biggest problem.
+
+This was my first time implementing a theme changer (to toggle light/dark mode). Please check [useful resources](#useful-resources) to learn how I did it.
+
+### Useful resources
+
+- [How to Create a Dark Mode in Sass](https://medium.com/@katiemctigue/how-to-create-a-dark-mode-in-sass-609f131a3995)
+- [Ekaterine Mitagvaria's code](https://github.com/catherineisonline/rest-countries)
+- [Client-side data fetching with useEffect](https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side#client-side-data-fetching-with-useeffect)
+
+## Author
+
+- Github - [daniel-web-developer](https://github.com/daniel-web-developer)
+- Frontend Mentor - [@daniel-web-developer](https://www.frontendmentor.io/profile/daniel-web-developer)
+
+## Acknowledgments
+
+I'd like to point out that my code was loosely inspired on [Ekaterine Mitagvaria's](https://www.frontendmentor.io/profile/catherineisonline) solution ([live site](https://restful-countries.vercel.app/), [Frontend Mentor solution](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-SySqXmn49) and [code](https://github.com/catherineisonline/rest-countries)).
