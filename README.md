@@ -30,11 +30,11 @@ Users should be able to:
 
 ### Screenshot
 
-
+![image](https://github.com/daniel-web-developer/flags-api/assets/107224353/74f33229-d0fc-4545-a994-ddb63ea98dc6)
 
 ### Links
 
-- [Live Site URL]()
+- [Live Site URL](https://countries-api-daniel-web-developer.vercel.app/)
 
 ## My process
 
