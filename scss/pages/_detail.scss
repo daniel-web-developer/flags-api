@@ -67,10 +67,6 @@
     &-border{
         padding-top: 32px;
 
-        @include themed(){
-            // background-color: t("bg");
-        }
-
         &-text{
             font-size: 14px;
 
@@ -91,6 +87,7 @@
             a{
                 border-radius: 5px;
                 padding: 10px;
+                margin-bottom: 8px;
 
                 @include themed(){
                     color: t("text");
