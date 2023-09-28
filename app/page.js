@@ -16,7 +16,7 @@ function getCountries(searchValue, regionValue){
       setLoading(true);
       const res = await fetch(urlAll);
       const data = await res.json();
-      setCountries(data);
+      setCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)));
       setLoading(false);
     }
     catch (error){
@@ -30,7 +30,7 @@ function getCountries(searchValue, regionValue){
       const urlRegion = 'https://restcountries.com/v3.1/region/' + regionFilter
       const res = await fetch(urlRegion);
       const data = await res.json();
-      setCountries(data);
+      setCountries(data.sort((a, b) => a.name.common.localeCompare(b.name.common)));
       setLoading(false);
     }
     catch (error){
