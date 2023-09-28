@@ -132,9 +132,6 @@ main {
 .home-search:focus {
   outline: none;
 }
-.home-search::-moz-placeholder {
-  opacity: 1;
-}
 .home-search::placeholder {
   opacity: 1;
 }
@@ -221,6 +218,7 @@ main {
   height: 150px;
   width: 250px;
   border-radius: 5px 5px 0 0;
+  object-fit: cover;
 }
 .country-notfound {
   font-size: 32px;
@@ -261,6 +259,7 @@ main {
 .detail-image {
   height: auto;
   width: 530px;
+  object-fit: cover;
 }
 .detail-padding {
   padding-top: 75px;
@@ -444,4 +443,6 @@ main {
   .header-logo {
     font-size: 16px;
   }
-}/*# sourceMappingURL=style.css.map */
+}
+
+/*# sourceMappingURL=style.css.map */
